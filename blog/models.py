@@ -11,6 +11,8 @@ class Blog(Model):
     content = TextField(verbose_name='İçerik')
     date = DateTimeField(blank=True, null=True, verbose_name='Tarih')
     is_active = BooleanField(default=False, verbose_name='Aktif')
+    created_at = DateTimeField(auto_now_add=True, editable=False, verbose_name='Oluşturma Tarihi')
+    updated_at = DateTimeField(auto_now=True, editable=False, verbose_name='Güncelleme Tarihi')
 
 
     class Meta:
