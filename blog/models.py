@@ -5,11 +5,9 @@ from django_extensions.db.fields import AutoSlugField
 
 class Blog(Model):
     author = ForeignKey('auth.User', verbose_name='Yazar', on_delete=models.CASCADE)
-    thumbnail = ImageField(verbose_name='Ufak Resim', null=True, upload_to='images/blog/thumbnails/')
     title = CharField(max_length=100, verbose_name='Başlık')
     slug = AutoSlugField(populate_from='title')
     content = TextField(verbose_name='İçerik')
-    date = DateTimeField(blank=True, null=True, verbose_name='Tarih')
     is_active = BooleanField(default=False, verbose_name='Aktif')
     created_at = DateTimeField(auto_now_add=True, editable=False, verbose_name='Oluşturma Tarihi')
     updated_at = DateTimeField(auto_now=True, editable=False, verbose_name='Güncelleme Tarihi')
