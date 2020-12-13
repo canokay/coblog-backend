@@ -26,3 +26,14 @@ class BlogDetailView(APIView):
         blog = Blog.objects.filter(id=self.kwargs['id'])
         serializer = BlogDetailSerializer(blog, many=True)
         return Response(serializer.data)
+
+class BlogSearchView(APIView):
+    def get(self, request, format=None):
+        blog = Blog.objects.filter(title=self.kwargs['title'])
+        
+        serializer_class = BlogListSerializer
+
+
+    def post(self, request, format=None):
+        pass
+
