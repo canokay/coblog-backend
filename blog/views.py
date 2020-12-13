@@ -1,5 +1,6 @@
 from blog.models import Blog
 from blog.serializers import BlogListSerializer, BlogDetailSerializer
+from django.shortcuts import get_object_or_404
 from rest_framework import viewsets
 from rest_framework.views  import APIView
 from rest_framework.generics import ListAPIView
@@ -22,9 +23,9 @@ class BlogListView(ListAPIView):
 
 
 class BlogDetailView(APIView):
-    def get(self, request, *args, **kwargs):
-        blog = Blog.objects.filter(id=self.kwargs['id'])
-        serializer = BlogDetailSerializer(blog, many=True)
+    def get(self, request, id, format=None):
+        blog = get_object_or_404(Blog, id=id)
+        serializer = BlogDetailSerializer(Blog.objects.filter(id=id), many=True)
         return Response(serializer.data)
 
 class BlogSearchView(APIView):
